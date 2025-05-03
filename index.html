@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOPVIBES - Drop #002 Kanye West Pemuche</title>
+    <meta name="description" content="TOPVIBES Drop #002: Peluche inspirado en Kanye West. Edición limitada de streetwear coleccionable.">
+    <meta name="keywords" content="TOPVIBES, Kanye West, peluche, streetwear, moda urbana, edición limitada">
+    <title>TOPVIBES - Drop #002 Kanye West Peluche</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,8 +16,19 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #1a1a1a;
+            background-color: #121212;
             color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
         }
 
         /* Header */
@@ -23,33 +37,37 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background-color: #000;
+            background: linear-gradient(90deg, #000, #1a1a1a);
             position: fixed;
             width: 100%;
-            top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .logo h1 {
-            font-size: 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
             color: #fff;
+            letter-spacing: 2px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
         nav ul li a {
             color: #fff;
             text-decoration: none;
             font-weight: 700;
-            transition: color 0.3s;
+            font-size: 1.1rem;
+            transition: color 0.3s, transform 0.3s;
         }
 
         nav ul li a:hover {
-            color: #ff0000;
+            color: #ff3333;
+            transform: scale(1.1);
         }
 
         /* Hero Section */
@@ -60,142 +78,300 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
 
         .hero-content {
-            background: rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 2;
             padding: 40px;
-            border-radius: 10px;
+            max-width: 700px;
         }
 
         .hero h2 {
-            font-size: 3.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            line-height: 1.1;
             margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .cta-button {
-            background-color: #ff0000;
+            background: #ff3333;
             color: #fff;
-            padding: 15px 30px;
+            padding: 15px 40px;
             text-decoration: none;
-            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .cta-button:hover {
-            background-color: #cc0000;
+            background: #cc0000;
+            transform: translateY(-5px);
         }
 
         /* Product Section */
         .product {
-            padding: 100px 50px;
+            padding: 120px 50px;
+            background: linear-gradient(180deg, #1a1a1a, #121212);
             text-align: center;
         }
 
         .product h2 {
-            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
             margin-bottom: 40px;
+            text-transform: uppercase;
         }
 
         .product-container {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 60px;
             flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .product-image {
-            max-width: 400px;
-            border-radius: 10px;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
         }
 
         .product-details {
-            max-width: 400px;
+            max-width: 500px;
             text-align: left;
         }
 
         .product-details h3 {
-            font-size: 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
         .product-details p {
             font-size: 1.1rem;
+            line-height: 1.6;
             margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .product-details ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .product-details ul li {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .product-details ul li::before {
+            content: '•';
+            color: #ff3333;
+            position: absolute;
+            left: 0;
         }
 
         .add-to-cart {
-            background-color: #ff0000;
+            background: #ff3333;
             color: #fff;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border: none;
-            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .add-to-cart:hover {
-            background-color: #cc0000;
+            background: #cc0000;
+            transform: translateY(-5px);
         }
 
         /* Inspiration Section */
         .inspiration {
-            padding: 100px 50px;
-            background-color: #333;
+            padding: 120px 50px;
+            background: #222;
             text-align: center;
         }
 
         .inspiration h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
         }
 
         .inspiration p {
             font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #ff3333;
+            margin-top: 20px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 120px 50px;
+            background: linear-gradient(180deg, #121212, #1a1a1a);
+            text-align: center;
+        }
+
+        .gallery h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 50px;
+            background: #333;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
+            opacity: 0.9;
         }
 
         /* Footer */
         footer {
-            background-color: #000;
-            padding: 40px 50px;
+            background: #000;
+            padding: 60px 50px;
             text-align: center;
         }
 
         .footer-content p {
+            font-size: 1rem;
             margin-bottom: 20px;
+            opacity: 0.8;
         }
 
         .social-links {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             margin-bottom: 20px;
         }
 
         .social-links li a {
             color: #fff;
             text-decoration: none;
-            font-weight: 700;
+            font-size: 1.2rem;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .social-links li a:hover {
-            color: #ff0000;
+            color: #ff3333;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-image {
+                max-width: 100%;
+            }
+
+            .product-details {
+                text-align: center;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header class="fade-in">
         <div class="logo">
             <h1>TOPVIBES</h1>
         </div>
@@ -203,6 +379,7 @@
             <ul>
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#shop">Tienda</a></li>
+                <li><a href="#inspiration">Inspiración</a></li>
                 <li><a href="#about">Sobre Nosotros</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
@@ -210,45 +387,69 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero fade-in">
         <div class="hero-content">
-            <h2>Drop #002: Kanye West Pemuche</h2>
-            <p>La vibra de Ye en cada detalle. Edición limitada.</p>
+            <h2>Drop #002: Kanye West Peluche</h2>
+            <p>Un coleccionable único que captura la esencia de Ye. Edición limitada, solo para visionarios.</p>
             <a href="#shop" class="cta-button">Comprar Ahora</a>
         </div>
     </section>
 
     <!-- Product Section -->
-    <section id="shop" class="product">
+    <section id="shop" class="product fade-in">
         <h2>Drop #002</h2>
         <div class="product-container">
-            <img src="pemuche-kanye.jpg" alt="Kanye West Pemuche" class="product-image">
+            <img src="peluche-kanye.jpg" alt="Kanye West Peluche" class="product-image">
             <div class="product-details">
-                <h3>Pemuche Kanye West</h3>
-                <p>Precio: $89.99</p>
-                <p>Tallas: S, M, L, XL</p>
-                <p>Un pemuche oversized inspirado en la estética visionaria de Kanye West. Fabricado con materiales premium, diseño exclusivo y detalles bordados. Perfecto para los amantes del streetwear.</p>
+                <h3>Peluche Kanye West</h3>
+                <p><strong>Precio:</strong> $89.99</p>
+                <p><strong>Tamaño:</strong> 40 cm (altura)</p>
+                <p>El Drop #002 es un peluche premium inspirado en la estética audaz y visionaria de Kanye West. Diseñado para coleccionistas y fans del streetwear, combina materiales de alta calidad con un diseño que refleja la vibra de Ye.</p>
+                <ul>
+                    <li><strong>Material:</strong> Felpa suave y relleno de algodón hipoalergénico.</li>
+                    <li><strong>Detalles:</strong> Bordados exclusivos con frases icónicas de Kanye.</li>
+                    <li><strong>Edición:</strong> Solo 500 unidades, numeradas individualmente.</li>
+                    <li><strong>Cuidado:</strong> Lavable a mano para mayor durabilidad.</li>
+                </ul>
                 <button class="add-to-cart">Añadir al Carrito</button>
             </div>
         </div>
     </section>
 
     <!-- Inspiration Section -->
-    <section id="about" class="inspiration">
+    <section id="inspiration" class="inspiration fade-in">
         <h2>Inspirado en Kanye</h2>
-        <p>El Drop #002 rinde homenaje a Kanye West, un ícono que ha revolucionado la música, la moda y la cultura. Su visión audaz y sin límites es el corazón de este pemuche, diseñado para quienes viven sin reglas.</p>
+        <p>Kanye West no es solo un artista; es un movimiento cultural. Desde sus revolucionarios álbumes hasta su imperio Yeezy, Ye ha redefinido lo que significa ser un creador. Este peluche captura su espíritu innovador, con detalles que rinden homenaje a su legado en la música y la moda.</p>
+        <p class="quote">"I am a god, hurry up with my damn massage." – Kanye West</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery fade-in">
+        <h2>Galería</h2>
+        <div class="gallery-grid">
+            <img src="peluche-kanye-1.jpg" alt="Peluche Kanye Close-Up">
+            <img src="peluche-kanye-2.jpg" alt="Peluche Kanye Lifestyle">
+            <img src="peluche-kanye-3.jpg" alt="Peluche Kanye Packaging">
+            <img src="peluche-kanye-4.jpg" alt="Peluche Kanye Details">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <h2>Sobre TOPVIBES</h2>
+        <p>TOPVIBES es una marca nacida en la intersección de la moda, la música y la cultura urbana. Creamos piezas únicas que celebran a los íconos que han cambiado el juego. Cada drop es una declaración, diseñada para quienes viven sin límites. Únete a la vibra.</p>
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer id="contact" class="fade-in">
         <div class="footer-content">
             <p>© 2025 TOPVIBES. Todos los derechos reservados.</p>
             <ul class="social-links">
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">TikTok</a></li>
+                <li><a href="https://instagram.com/topvibes" target="_blank">Instagram</a></li>
+                <li><a href="https://twitter.com/topvibes" target="_blank">Twitter</a></li>
+                <li><a href="https://tiktok.com/@topvibes" target="_blank">TikTok</a></li>
             </ul>
-            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a> | <a href="#">Envíos y Devoluciones</a></p>
         </div>
     </footer>
 </body>
