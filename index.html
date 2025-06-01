@@ -81,6 +81,9 @@
             font-size: 0.9rem;
             font-weight: bold;
             position: relative;
+        }
+
+        .price-container.animate .original-price {
             animation: strike-and-fade 2s ease forwards;
         }
 
@@ -94,6 +97,9 @@
             background: #ff3333;
             transform: scaleX(0);
             transform-origin: left;
+        }
+
+        .price-container.animate .original-price::after {
             animation: strike-through 1s ease 0.5s forwards;
         }
 
@@ -102,6 +108,9 @@
             font-weight: bold;
             color: #00ff00;
             opacity: 0;
+        }
+
+        .price-container.animate .new-price {
             animation: fade-in 1s ease 1.5s forwards;
         }
 
@@ -767,8 +776,9 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Carousel -->
+    <!-- JavaScript for Carousel and Price Animation -->
     <script>
+        // Carousel functionality
         const carouselImages = document.querySelector('.carousel-images');
         const carouselDots = document.querySelectorAll('.carousel-dot');
         const prevButton = document.querySelector('.carousel-button.prev');
@@ -817,6 +827,21 @@
             }
             updateCarousel();
         });
+
+        // Price animation with IntersectionObserver
+        const priceContainer = document.querySelector('.price-container');
+        const productSection = document.querySelector('#product');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    priceContainer.classList.add('animate');
+                    observer.unobserve(productSection); // Stop observing after animation
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(productSection);
     </script>
 
     <!-- JavaScript for File Processing -->
