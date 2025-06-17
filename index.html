@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -300,6 +339,91 @@
             z-index: 1;
         }
 
+        /* Reviews Section */
+        .reviews {
+            padding: 60px 20px;
+            text-align: center;
+            background: #1a1a1a;
+        }
+
+        .reviews h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .reviews-container {
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .reviews-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .review-box {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 15px;
+            min-width: 300px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .review-box .stars {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .review-box .stars .star {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279L.587 9.306l8.332-1.151z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .review-box p {
+            font-size: 1rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 600px) {
+            .reviews {
+                padding: 40px 15px;
+            }
+
+            .reviews h2 {
+                font-size: 1.5rem;
+            }
+
+            .review-box {
+                min-width: 250px;
+            }
+
+            .review-box .stars .star {
+                width: 20px;
+                height: 20px;
+            }
+
+            .review-box p {
+                font-size: 0.9rem;
+            }
+        }
+
         /* Product Section */
         .product {
             padding: 80px 20px;
@@ -352,7 +476,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
+            background: #222;
             color: #fff;
             border: none;
             padding: 10px;
@@ -364,7 +488,7 @@
 
         .carousel-button:hover {
             transform: translateY(-50%) scale(1.2);
-            background: rgba(0, 0, 0, 0.8);
+            background: #ff3333;
         }
 
         .carousel-button.prev {
@@ -464,7 +588,7 @@
 
         .wallapop-button:hover {
             transform: scale(1.15) rotate(2deg);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Testimonials Section */
@@ -484,7 +608,7 @@
 
         .video-container {
             max-width: 400px;
-            margin: 0 auto;
+            margin: 0 auto 20px;
             animation: slideInUp 1s ease-out 0.2s;
             animation-fill-mode: both;
         }
@@ -492,7 +616,7 @@
         .video-container video {
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: box-shadow 0.3s ease;
         }
 
@@ -500,10 +624,45 @@
             box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
         }
 
+        /* Supporters Section */
+        .supporters {
+            margin-top: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .supporters-box {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            animation: slideInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .supporters-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .supporters-box a {
+            color: #ff3333;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        .supporters-box a:hover {
+            color: #ff6666;
+            text-decoration: underline;
+        }
+
         /* Footer */
         footer {
             background: #000;
-            padding: 30px 20px;
+            padding: 30px;
             text-align: center;
             animation: fadeIn 1s ease-out;
         }
@@ -528,7 +687,7 @@
             transition: transform 0.5s ease, color 0.3s ease;
         }
 
-        .social-links li a i:hover {
+        .social-links li a:hover i {
             transform: rotate(360deg);
             color: #ff3333;
         }
@@ -650,6 +809,14 @@
                 animation-duration: 0.8s;
             }
 
+            .supporters {
+                max-width: 300px;
+            }
+
+            .supporters-box p {
+                font-size: 0.8rem;
+            }
+
             footer {
                 padding: 20px 15px;
                 animation-duration: 0.8s;
@@ -704,6 +871,47 @@
                 <p>Si no te sientes satisfecho con el producto te devolvemos el dinero.</p>
             </div>
         </div>
+        <!-- Reviews Section -->
+        <section class="reviews">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <div class="reviews-container">
+                <div class="reviews-track">
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Muy bueno, excelente.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Está todo perfecto.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Muy simpático y super rápido.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>100% recomedable.</p>
+                    </div>
+                    <!-- Duplicated for seamless looping -->
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>¡Calidad increíble! Súper suave.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Envío rápido, diseño top.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Perfecto! Super rápido y buen servicio.</p>
+                    </div>
+                    <div class="review-box">
+                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+                        <p>Mejor en persona, cómodo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
 
     <!-- Product Section -->
@@ -761,6 +969,22 @@
                 <source src="https://files.catbox.moe/kvbylm.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
+        </div>
+        <div class="supporters">
+            <div class="supporters-box">
+                <p>
+                    <a href="https://www.tiktok.com/@cristobalsoria" target="_blank">@cristobalsoria</a>
+                    <a href="https://www.tiktok.com/@titochapee" target="_blank">@titochapee</a>
+                    <a href="https://www.tiktok.com/@alvarozavetti2002" target="_blank">@alvarozavetti2002</a>
+                    <a href="https://www.tiktok.com/@elcrostii" target="_blank">@elcrostii</a>
+                    <a href="https://www.tiktok.com/@ramoncinreall4" target="_blank">@ramoncinreall4</a>
+                    <a href="https://www.tiktok.com/@_.port0._" target="_blank">@_.port0._</a>
+                    <a href="https://www.tiktok.com/@adrinavarromusic" target="_blank">@adrinavarromusic</a>
+                    <a href="https://www.tiktok.com/@10.denisss_" target="_blank">@10.denisss_</a>
+                    <a href="https://www.tiktok.com/@plaferreape" target="_blank">@plaferreape</a>
+                    <a href="https://www.tiktok.com/@7javichu_" target="_blank">@7javichu_</a>
+                </p>
+            </div>
         </div>
     </section>
 
