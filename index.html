@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TOPVIBES Drop #002: Peluche inspirado de Kanye West. Disponible en Vinted y Wallapop.">
     <meta name="keywords" content="TOPVIBES, Kanye West, peluche, streetwear, moda urbana, Vinted, Wallapop">
-    <title>TOPVIBES - Drop #002 Oso Kanye West Peluche</title>
+    <title>TOPVIBES - Drop #003 ¿Qué Será?</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
@@ -43,13 +43,7 @@
         }
 
         /* Exclude specific images from border-radius */
-        .logo img {
-            border-radius: 0;
-        }
-        .feature-box img {
-            border-radius: 0;
-        }
-        .social-links img {
+        .logo img, .feature-box img, .social-links img {
             border-radius: 0;
         }
 
@@ -69,72 +63,70 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* Animación para el precio */
-        .price-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .original-price {
-            color: #ff3333;
-            font-size: 0.9rem;
-            font-weight: bold;
+        /* Glitch Effect */
+        .glitch {
             position: relative;
+            color: #fff;
+            animation: glitch 1s linear infinite;
         }
 
-        .price-container.animate .original-price {
-            animation: strike-and-fade 2s ease forwards;
-        }
-
-        .original-price::after {
-            content: '';
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: #ff3333;
-            transform: scaleX(0);
-            transform-origin: left;
+            height: 100%;
         }
 
-        .price-container.animate .original-price::after {
-            animation: strike-through 1s ease 0.5s forwards;
+        .glitch::before {
+            color: #ff3333;
+            animation: glitch-top 0.6s linear infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
         }
 
-        .new-price {
-            font-size: 0.9rem;
-            font-weight: bold;
+        .glitch::after {
             color: #00ff00;
-            opacity: 0;
+            animation: glitch-bottom 0.8s linear infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
         }
 
-        .price-container.animate .new-price {
-            animation: fade-in 1s ease 1.5s forwards;
-        }
-
-        @keyframes strike-through {
-            to {
-                transform: scaleX(1);
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
             }
         }
 
-        @keyframes strike-and-fade {
-            0% {
-                opacity: 1;
+        @keyframes glitch-top {
+            2%, 64% {
+                transform: translate(2px, -2px);
             }
-            50% {
-                opacity: 1;
+            4%, 60% {
+                transform: translate(-2px, 2px);
             }
-            100% {
-                opacity: 0.5;
+            62% {
+                transform: translate(0, 0) skew(-5deg);
             }
         }
 
-        @keyframes fade-in {
-            to {
-                opacity: 1;
+        @keyframes glitch-bottom {
+            2%, 64% {
+                transform: translate(-2px, 2px);
+            }
+            4%, 60% {
+                transform: translate(2px, -2px);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
             }
         }
 
@@ -147,13 +139,13 @@
             top: 0;
             z-index: 1000;
             text-align: center;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .logo img {
             height: 40px;
             width: auto;
-            transition: transform: 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .logo img:hover {
@@ -186,7 +178,7 @@
             z-index: 1;
             padding: 20px;
             max-width: 90%;
-            animation: slideInUp 1s ease-out;
+            animation: slideInUp 0.8s ease-out;
         }
 
         .hero h2 {
@@ -233,7 +225,7 @@
             font-size: 2rem;
             margin-bottom: 20px;
             text-transform: uppercase;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .about p {
@@ -242,8 +234,7 @@
             max-width: 600px;
             margin: 0 auto 15px;
             opacity: 0.9;
-            animation: fadeIn 1s ease-out 0.2s;
-            animation-fill-mode: both;
+            animation: fadeIn 0.8s ease-out 0.2s;
         }
 
         .features {
@@ -261,7 +252,7 @@
             width: 250px;
             text-align: center;
             animation: scaleIn 0.8s ease-out;
-            transition: transform: 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .feature-box:hover {
@@ -294,330 +285,9 @@
             opacity: 0.9;
         }
 
-        /* Remove speed lines for Envío Rápido */
         .fa-box::before {
             position: relative;
             z-index: 1;
-        }
-
-        /* Reviews Section */
-        .reviews {
-            padding: 60px 20px;
-            text-align: center;
-            background: #1a1a1a;
-        }
-
-        .reviews h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .reviews-container {
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .reviews-track {
-            display: flex;
-            animation: scroll 10s linear infinite; /* Faster speed for all devices */
-        }
-
-        .review-box {
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 0 15px;
-            min-width: 300px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .review-box .stars {
-            color: #ffd700;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        .review-box .stars .star {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279L.587 9.306l8.332-1.151z"/></svg>') no-repeat center;
-            background-size: contain;
-        }
-
-        .review-box p {
-            font-size: 1rem;
-            line-height: 1.4;
-            opacity: 0.9;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        @media (max-width: 600px) {
-            .reviews {
-                padding: 40px 15px;
-            }
-
-            .reviews h2 {
-                font-size: 1.5rem;
-            }
-
-            .review-box {
-                min-width: 250px;
-            }
-
-            .review-box .stars .star {
-                width: 20px;
-                height: 20px;
-            }
-
-            .review-box p {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Product Section */
-        .product {
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .product h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .product-container {
-            display: flex;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-            align-items: flex-start;
-        }
-
-        /* Carousel */
-        .carousel {
-            position: relative;
-            max-width: 350px;
-            overflow: hidden;
-            border-radius: 10px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .carousel-images {
-            display: flex;
-            transition: transform: 0.5s ease;
-        }
-
-        .carousel-images img {
-            width: 350px;
-            height: auto;
-            flex-shrink: 0;
-            border-radius: 10px;
-            transition: transform: 0.3s ease;
-        }
-
-        .carousel-images img:hover {
-            transform: scale(1.05);
-        }
-
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #222;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-button:hover {
-            transform: translateY(-50%) scale(1.2);
-            background: #ff3333;
-        }
-
-        .carousel-button.prev {
-            left: 10px;
-        }
-
-        .carousel-button.next {
-            right: 10px;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            background: #555;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background: 0.3s ease;
-        }
-
-        .carousel-dot.active {
-            background: #ff3333;
-        }
-
-        .carousel-dot:hover {
-            background: #ff6666;
-        }
-
-        .product-details {
-            flex: 1;
-            text-align: left;
-            animation: scaleIn 1s ease-out;
-        }
-
-        .product-details h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .product-details p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-
-        .product-details ul {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .product-details ul li {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .buy-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .buy-button {
-            width: 100px;
-            height: 50px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .buy-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .vinted-button {
-            background: #037783;
-        }
-
-        .vinted-button:hover {
-            transform: scale(1.15) rotate(2deg);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        .wallapop-button {
-            background: #00c4b4;
-        }
-
-        .wallapop-button:hover {
-            transform: scale(1.15) rotate(2deg);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            padding: 60px 20px;
-            text-align: center;
-            background: #1a1a1a;
-        }
-
-        .testimonials h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .video-container {
-            max-width: 400px;
-            margin: 0 auto 20px;
-            animation: slideInUp 1s ease-out 0.2s;
-            animation-fill-mode: both;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .video-container video:hover {
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
-        }
-
-        /* Supporters Section */
-        .supporters {
-            margin-top: 30px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .supporters-box {
-            background: #222;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            animation: slideInUp 1s ease-out 0.6s;
-            animation-fill-mode: both;
-        }
-
-        .supporters-box p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .supporters-box a {
-            color: #ff3333;
-            text-decoration: none;
-            margin: 0 5px;
-            transition: color 0.3s ease;
-        }
-
-        .supporters-box a:hover {
-            color: #ff6666;
-            text-decoration: underline;
         }
 
         /* Footer */
@@ -625,7 +295,7 @@
             background: #000;
             padding: 30px;
             text-align: center;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .footer-content p {
@@ -657,7 +327,7 @@
         @media (max-width: 600px) {
             header {
                 padding: 10px 15px;
-                animation-duration: 0.8s;
+                animation-duration: 0.6s;
             }
 
             .logo img {
@@ -669,7 +339,7 @@
             }
 
             .hero-content {
-                animation-duration: 0.8s;
+                animation-duration: 0.6s;
             }
 
             .hero h2 {
@@ -710,77 +380,9 @@
                 animation-duration: 0.6s;
             }
 
-            .product {
-                padding: 60px 15px;
-            }
-
-            .product h2 {
-                font-size: 1.5rem;
-                animation-duration: 0.8s;
-            }
-
-            .product-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .carousel {
-                max-width: 250px;
-                animation-duration: 0.8s;
-            }
-
-            .carousel-images img {
-                width: 250px;
-            }
-
-            .carousel-button {
-                padding: 8px;
-                font-size: 1rem;
-            }
-
-            .product-details {
-                text-align: center;
-                animation-duration: 0.8s;
-            }
-
-            .product-details h3 {
-                font-size: 1.5rem;
-            }
-
-            .buy-buttons {
-                justify-content: center;
-            }
-
-            .buy-button {
-                width: 80px;
-                height: 40px;
-            }
-
-            .testimonials {
-                padding: 40px 15px;
-            }
-
-            .testimonials h2 {
-                font-size: 1.5rem;
-                animation-duration: 0.8s;
-            }
-
-            .video-container {
-                max-width: 300px;
-                animation-duration: 0.8s;
-            }
-
-            .supporters {
-                max-width: 300px;
-            }
-
-            .supporters-box p {
-                font-size: 0.8rem;
-            }
-
             footer {
                 padding: 20px 15px;
-                animation-duration: 0.8s;
+                animation-duration: 0.6s;
             }
 
             .footer-content p {
@@ -804,9 +406,9 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2>Drop #002: Kanye West Peluche</h2>
-            <p>Un coleccionable único que captura la esencia de Kanye West</p>
-            <a href="#product" class="cta-button">Ver Ahora</a>
+            <h2>Drop #003: <span class="glitch" data-text="?????">?????</span></h2>
+            <p>¿Qué podrá ser?</p>
+            <a href="#" class="cta-button">Proximamente</a>
         </div>
     </section>
 
@@ -824,125 +426,12 @@
             <div class="feature-box">
                 <i class="fas fa-box"></i>
                 <h3>Envío Rápido</h3>
-                <p>Los envíos se mandan entre 24 y 48 horas despues de la compra.</p>
+                <p>Los envíos se mandan entre 24 y 48 horas después de la compra.</p>
             </div>
             <div class="feature-box">
                 <i class="fas fa-truck"></i>
                 <h3>Devolución Garantizada</h3>
                 <p>Si no te sientes satisfecho con el producto te devolvemos el dinero.</p>
-            </div>
-        </div>
-        <!-- Reviews Section -->
-        <section class="reviews">
-            <h2>Lo que dicen nuestros clientes</h2>
-            <div class="reviews-container">
-                <div class="reviews-track">
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Muy bueno, excelente.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Está todo perfecto.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Muy simpático y super rápido.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>100% recomedable.</p>
-                    </div>
-                    <!-- Duplicated for seamless looping -->
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>¡Calidad increíble! Súper suave.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Envío rápido, diseño top.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Perfecto! Super rápido y buen servicio.</p>
-                    </div>
-                    <div class="review-box">
-                        <div class="stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p>Mejor en persona, cómodo.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- Product Section -->
-    <section id="product" class="product">
-        <h2>Drop #002</h2>
-        <div class="product-container">
-            <div class="carousel">
-                <div class="carousel-images">
-                    <img src="https://files.catbox.moe/771mri.jpg" alt="Kanye West Peluche 1">
-                    <img src="https://files.catbox.moe/f4n2un.jpg" alt="Kanye West Peluche 2">
-                    <img src="https://files.catbox.moe/wprx4e.jpg" alt="Kanye West Peluche 3">
-                    <img src="https://files.catbox.moe/t6mtc7.jpg" alt="Kanye West Peluche 4">
-                </div>
-                <button class="carousel-button prev">❮</button>
-                <button class="carousel-button next">❯</button>
-                <div class="carousel-dots">
-                    <span class="carousel-dot active"></span>
-                    <span class="carousel-dot"></span>
-                    <span class="carousel-dot"></span>
-                    <span class="carousel-dot"></span>
-                </div>
-            </div>
-            <div class="product-details">
-                <h3>Peluche Oso Kanye West</h3>
-                <p>Este peluche está inspirado en el icónico oso del álbum Graduation de Kanye West. Fabricado con felpa suave y relleno de algodón, es cómodo, ligero y tiene un acabado de calidad. Lleva puesta una chaqueta gris con detalles en azul y una camiseta estampada, recreando el look original del personaje.</p>
-                <p>Ideal para fans de Kanye, coleccionistas o como detalle decorativo. Una pieza única que mezcla música, nostalgia y estilo.</p>                
-                <p><strong>Precio:</strong> 
-                    <span class="price-container">
-                        <span class="original-price">14.99€</span>
-                        <span class="new-price">10.99€</span>
-                    </span>
-                </p>
-                <p><strong>Tamaño:</strong> 26 cm</p>                
-                <p><strong>Materiales:</strong> Felpa (exterior) + algodón (interior)</p>
-                <div class="buy-buttons">
-                    <a href="https://www.vinted.es/items/6499489430-oso-kanye-bear-graduation-peluche" target="_blank" class="buy-button vinted-button">
-                        <img src="https://logos-world.net/wp-content/uploads/2024/07/Vinted-Symbol.png" alt="Vinted Logo">
-                    </a>
-                    <a href="https://wallapop.com/item/peluche-kanye-west-dropout-bear-escribeme-antes-de-comprar-1122904935?utm_medium=AppShare&utm_source=ShareItem" target="_blank" class="buy-button wallapop-button">
-                        <img src="https://www.trecebits.com/wp-content/uploads/2022/12/wallapop-800x445.webp" alt="Wallapop Logo">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <h2>ELLOS TAMBIÉN VIVEN EL DROP #002, ¿Y TÚ?</h2>
-        <div class="video-container">
-            <video controls>
-                <source src="https://files.catbox.moe/kvbylm.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-        </div>
-        <div class="supporters">
-            <div class="supporters-box">
-                <p>
-                    <a href="https://www.tiktok.com/@cristobalsoria" target="_blank">@cristobalsoria</a>
-                    <a href="https://www.tiktok.com/@titochapee" target="_blank">@titochapee</a>
-                    <a href="https://www.tiktok.com/@alvarozavetti2002" target="_blank">@alvarozavetti2002</a>
-                    <a href="https://www.tiktok.com/@elcrostii" target="_blank">@elcrostii</a>
-                    <a href="https://www.tiktok.com/@ramoncinreall4" target="_blank">@ramoncinreall4</a>
-                    <a href="https://www.tiktok.com/@_.port0._" target="_blank">@_.port0._</a>
-                    <a href="https://www.tiktok.com/@adrinavarromusic" target="_blank">@adrinavarromusic</a>
-                    <a href="https://www.tiktok.com/@10.denisss_" target="_blank">@10.denisss_</a>
-                    <a href="https://www.tiktok.com/@plaferreape" target="_blank">@plaferreape</a>
-                    <a href="https://www.tiktok.com/@7javichu_" target="_blank">@7javichu_</a>
-                    <a href="https://www.tiktok.com/@guillermocarracedo" target="_blank">@guillermocarracedo</a>
-                </p>
             </div>
         </div>
     </section>
@@ -959,74 +448,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Carousel and Price Animation -->
-    <script>
-        // Carousel functionality
-        const carouselImages = document.querySelector('.carousel-images');
-        const carouselDots = document.querySelectorAll('.carousel-dot');
-        const prevButton = document.querySelector('.carousel-button.prev');
-        const nextButton = document.querySelector('.carousel-button.next');
-        let currentIndex = 0;
-        const totalImages = carouselImages.children.length;
-
-        function updateCarousel() {
-            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-            carouselDots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            updateCarousel();
-        });
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalImages;
-            updateCarousel();
-        });
-
-        carouselDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
-            });
-        });
-
-        // Touch swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        carouselImages.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        carouselImages.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) {
-                currentIndex = (currentIndex + 1) % totalImages;
-            } else if (touchEndX - touchStartX > 50) {
-                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            }
-            updateCarousel();
-        });
-
-        // Price animation with IntersectionObserver
-        const priceContainer = document.querySelector('.price-container');
-        const productSection = document.querySelector('#product');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    priceContainer.classList.add('animate');
-                    observer.unobserve(productSection); // Stop observing after animation
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(productSection);
-    </script>
-
     <!-- JavaScript for File Processing -->
     <script type="text/javascript">
         var gk_isXlsx = false;
@@ -1041,22 +462,14 @@
                     var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
                     var firstSheetName = workbook.SheetNames[0];
                     var worksheet = workbook.Sheets[firstSheetName];
-
-                    // Convert sheet to JSON to filter blank rows
                     var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                    // Filter out blank rows (rows where all cells are empty, null, or undefined)
                     var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                    // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                     var headerRowIndex = filteredData.findIndex((row, index) =>
                         row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                     );
-                    // Fallback
                     if (headerRowIndex === -1 || headerRowIndex > 25) {
                         headerRowIndex = 0;
                     }
-
-                    // Convert filtered JSON back to CSV
                     var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
                     csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
                     return csv;
