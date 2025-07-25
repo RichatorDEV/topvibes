@@ -95,39 +95,21 @@
         }
 
         @keyframes glitch {
-            2%, 64% {
-                transform: translate(2px, 0) skew(0deg);
-            }
-            4%, 60% {
-                transform: translate(-2px, 0) skew(0deg);
-            }
-            62% {
-                transform: translate(0, 0) skew(5deg);
-            }
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
         }
 
         @keyframes glitch-top {
-            2%, 64% {
-                transform: translate(2px, -2px);
-            }
-            4%, 60% {
-                transform: translate(-2px, 2px);
-            }
-            62% {
-                transform: translate(0, 0) skew(-5deg);
-            }
+            2%, 64% { transform: translate(2px, -2px); }
+            4%, 60% { transform: translate(-2px, 2px); }
+            62% { transform: translate(0, 0) skew(-5deg); }
         }
 
         @keyframes glitch-bottom {
-            2%, 64% {
-                transform: translate(-2px, 2px);
-            }
-            4%, 60% {
-                transform: translate(2px, -2px);
-            }
-            62% {
-                transform: translate(0, 0) skew(5deg);
-            }
+            2%, 64% { transform: translate(-2px, 2px); }
+            4%, 60% { transform: translate(2px, -2px); }
+            62% { transform: translate(0, 0) skew(5deg); }
         }
 
         /* Header */
@@ -195,6 +177,7 @@
             opacity: 0.9;
         }
 
+        /* Estilo mejorado para los botones */
         .cta-button {
             background: #ff3333;
             color: #fff;
@@ -205,12 +188,16 @@
             border-radius: 5px;
             transition: all 0.3s ease;
             display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-button:hover {
             background: #cc0000;
             transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.7);
         }
 
         /* About Section */
@@ -259,13 +246,8 @@
             transform: translateY(-5px);
         }
 
-        .feature-box:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .feature-box:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+        .feature-box:nth-child(2) { animation-delay: 0.2s; }
+        .feature-box:nth-child(3) { animation-delay: 0.4s; }
 
         .feature-box i {
             font-size: 2rem;
@@ -288,6 +270,103 @@
         .fa-box::before {
             position: relative;
             z-index: 1;
+        }
+
+        /* Discount Code Section */
+        .discount-code {
+            padding: 60px 20px;
+            text-align: center;
+            background: #1a1a1a;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .code-header {
+            margin-bottom: 20px;
+        }
+
+        .code-header.hidden {
+            display: none;
+        }
+
+        .code-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .code-header p {
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            opacity: 0.9;
+        }
+
+        .code-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .code-form.hidden {
+            display: none;
+        }
+
+        .code-form input {
+            padding: 12px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            width: 200px;
+            text-transform: uppercase;
+        }
+
+        .discount-form {
+            max-width: 400px;
+            margin: 0 auto;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .discount-form.hidden {
+            display: none;
+        }
+
+        .discount-form h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .discount-form p {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .discount-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .discount-form input {
+            padding: 12px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+
+        .form-message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #ff3333;
         }
 
         /* Footer */
@@ -325,73 +404,26 @@
 
         /* Responsive Design */
         @media (max-width: 600px) {
-            header {
-                padding: 10px 15px;
-                animation-duration: 0.6s;
-            }
-
-            .logo img {
-                height: 30px;
-            }
-
-            .hero {
-                height: 40vh;
-            }
-
-            .hero-content {
-                animation-duration: 0.6s;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 0.8rem;
-            }
-
-            .cta-button {
-                padding: 10px 25px;
-                font-size: 1rem;
-            }
-
-            .about {
-                padding: 40px 15px;
-            }
-
-            .about h2 {
-                font-size: 1.5rem;
-                animation-duration: 0.6s;
-            }
-
-            .about p {
-                font-size: 0.8rem;
-                animation-duration: 0.6s;
-            }
-
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .feature-box {
-                width: 100%;
-                max-width: 300px;
-                animation-duration: 0.6s;
-            }
-
-            footer {
-                padding: 20px 15px;
-                animation-duration: 0.6s;
-            }
-
-            .footer-content p {
-                font-size: 0.7rem;
-            }
-
-            .social-links li a i {
-                font-size: 1.2rem;
-            }
+            header { padding: 10px 15px; animation-duration: 0.6s; }
+            .logo img { height: 30px; }
+            .hero { height: 40vh; }
+            .hero-content { animation-duration: 0.6s; }
+            .hero h2 { font-size: 1.8rem; }
+            .hero p { font-size: 0.8rem; }
+            .cta-button { padding: 10px 25px; font-size: 1rem; }
+            .about { padding: 40px 15px; }
+            .about h2 { font-size: 1.5rem; animation-duration: 0.6s; }
+            .about p { font-size: 0.8rem; animation-duration: 0.6s; }
+            .features { flex-direction: column; align-items: center; }
+            .feature-box { width: 100%; max-width: 300px; animation-duration: 0.6s; }
+            .discount-code { padding: 40px 15px; }
+            .code-header h2, .discount-form h2 { font-size: 1.5rem; }
+            .code-header p, .discount-form p { font-size: 0.8rem; }
+            .code-form input { width: 100%; max-width: 250px; }
+            .discount-form { max-width: 100%; }
+            footer { padding: 20px 15px; animation-duration: 0.6s; }
+            .footer-content p { font-size: 0.7rem; }
+            .social-links li a i { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -436,12 +468,37 @@
         </div>
     </section>
 
+    <!-- Discount Code Section -->
+    <section class="discount-code" id="discount-code">
+        <div class="code-header" id="codeHeader">
+            <h2>Canjea tu Código de Descuento</h2>
+            <p>Encuentra uno de los códigos para recibir un descuento en nuestro próximo drop.</p>
+        </div>
+        <div class="code-form" id="codeForm">
+            <input type="text" id="discountCode" placeholder="Ingresa tu código" maxlength="20">
+            <button id="verifyCode" class="cta-button">Verificar Código</button>
+        </div>
+        <div id="discountForm" class="discount-form hidden">
+            <h2>Completa el formulario</h2>
+            <p>Tienes que completar este formulario para que nos podamos poner en contacto contigo para obtener tu descuento.</p>
+            <form id="userInfoForm">
+                <input type="text" id="name" placeholder="Nombre completo" required>
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+                <input type="text" id="instagram" placeholder="Usuario de Instagram (ej: @usuario)">
+                <input type="text" id="tiktok" placeholder="Usuario de TikTok (ej: @usuario)">
+                <button type="submit" class="cta-button">Enviar</button>
+            </form>
+            <p id="formMessage" class="form-message"></p>
+        </div>
+        <p id="codeMessage" class="form-message"></p>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <p>© 2025 TOPVIBES. Todos los derechos reservados.</p>
             <ul class="social-links">
-                <li><a href="https://instagram.com/topvibeess/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.instagram.com/topvibeess/" target="_blank"><i class="fab fa-instagram"></i></a></li>
                 <li><a href="https://www.tiktok.com/@topvibeess" target="_blank"><i class="fab fa-tiktok"></i></a></li>
                 <li><a href="https://youtube.com/@topvibeess" target="_blank"><i class="fab fa-youtube"></i></a></li>
             </ul>
@@ -480,6 +537,81 @@
             }
             return gk_fileData[filename] || "";
         }
+    </script>
+
+    <!-- EmailJS SDK and Discount Code Functionality -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("bcud2NgRliClqVivQ"); // Reemplaza con tu clave pública de EmailJS
+        })();
+
+        // Lista de códigos de descuento válidos (todos en mayúsculas)
+        const validCodes = [
+            'M4S1T', 'BURRO', 'YOTAMBIENVIVOELDROP', 'D307', 'DROP003',
+            'SPRINT', 'TOP10', 'VIP2025', 'TOPVIBES25', 'CAST', 'INFLUENCERS',
+            'CHAPARRO', 'M7D5Z'
+        ];
+
+        // Verificar código
+        document.getElementById('verifyCode').addEventListener('click', function() {
+            const codeInput = document.getElementById('discountCode').value.trim().toUpperCase();
+            const codeHeader = document.getElementById('codeHeader');
+            const codeForm = document.getElementById('codeForm');
+            const discountForm = document.getElementById('discountForm');
+            const codeMessage = document.getElementById('codeMessage');
+
+            if (validCodes.includes(codeInput)) {
+                codeHeader.classList.add('hidden'); // Oculta el encabezado
+                codeForm.classList.add('hidden'); // Oculta la sección de canje
+                discountForm.classList.remove('hidden'); // Muestra el formulario
+                codeMessage.textContent = ''; // Limpia el mensaje de error
+            } else {
+                codeMessage.textContent = 'Código inválido. Por favor, intenta de nuevo.';
+                codeMessage.style.color = '#ff3333';
+            }
+        });
+
+        // Enviar formulario
+        document.getElementById('userInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formMessage = document.getElementById('formMessage');
+            const codeHeader = document.getElementById('codeHeader');
+            const codeForm = document.getElementById('codeForm');
+            const discountForm = document.getElementById('discountForm');
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const instagram = document.getElementById('instagram').value.trim();
+            const tiktok = document.getElementById('tiktok').value.trim();
+            const code = document.getElementById('discountCode').value.trim().toUpperCase();
+
+            if (!name || !email) {
+                formMessage.textContent = 'Por favor, completa los campos obligatorios.';
+                return;
+            }
+
+            emailjs.send('service_it08vcq', 'template_tlbbzd8', {
+                from_name: name,
+                email: email,
+                instagram: instagram || 'No proporcionado',
+                tiktok: tiktok || 'No proporcionado',
+                discount_code: code
+            }).then(
+                function(response) {
+                    formMessage.textContent = '¡Información enviada! Revisa tu correo para el descuento.';
+                    formMessage.style.color = '#00ff00';
+                    document.getElementById('userInfoForm').reset();
+                    document.getElementById('discountCode').value = '';
+                    discountForm.classList.add('hidden'); // Oculta el formulario
+                    codeHeader.classList.remove('hidden'); // Muestra el encabezado
+                    codeForm.classList.remove('hidden'); // Muestra la sección de canje
+                },
+                function(error) {
+                    formMessage.textContent = 'Error al enviar. Intenta de nuevo.';
+                    console.error('EmailJS error:', error);
+                }
+            );
+        });
     </script>
 </body>
 </html>
