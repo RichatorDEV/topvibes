@@ -418,6 +418,35 @@
             animation: modalClose 0.3s ease-out forwards;
         }
 
+        .vinted-modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            padding-top: 20px;
+        }
+
+        .vinted-modal-content {
+            background-color: #1a1a1a;
+            margin: 15% auto;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: modalOpen 0.3s ease-out;
+        }
+
+        .vinted-modal-content.closing {
+            animation: modalClose 0.3s ease-out forwards;
+        }
+
         .close {
             color: #fff;
             float: right;
@@ -433,7 +462,7 @@
             text-decoration: none;
         }
 
-        .modal h2 {
+        .modal h2, .vinted-modal h2 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 2rem;
             margin-bottom: 20px;
@@ -597,6 +626,17 @@
             width: 180px;
         }
 
+        .vinted-modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .vinted-modal-buttons .cta-button {
+            width: 160px;
+        }
+
         .discount-code {
             padding: 60px 20px;
             text-align: center;
@@ -742,7 +782,7 @@
             .telegram-section h2 { font-size: 1.5rem; }
             .telegram-section p { font-size: 0.8rem; }
             .discount-code { padding: 40px 15px; }
-            .code-header h2, .discount-form h2 { font-size: 1.5rem; }
+            .code-header h2, .discount-form h2, .vinted-modal h2 { font-size: 1.5rem; }
             .code-header p, .discount-form p { font-size: 0.8rem; }
             .code-form input { width: 100%; max-width: 250px; }
             .discount-form { max-width: 100%; }
@@ -752,10 +792,13 @@
             .shirt-card { width: 100%; }
             .shirt-card img { height: 150px; }
             .modal-content { width: 95%; max-width: 350px; }
+            .vinted-modal-content { width: 95%; max-width: 300px; }
             .shirt-detail-carousel { max-width: 100%; }
             .carousel-item img { max-height: 200px; }
             .shirt-detail-buttons { flex-direction: column; gap: 10px; }
             .shirt-detail-buttons .cta-button { width: 100%; }
+            .vinted-modal-buttons { flex-direction: column; }
+            .vinted-modal-buttons .cta-button { width: 100%; }
             .shirt-detail-intro, .shirt-detail-details, .shirt-detail-closing, .shirt-detail-size-info { font-size: 0.8rem; }
             .shirt-detail-details-header { font-size: 1rem; }
             .shirt-detail-details { padding: 10px 15px; }
@@ -788,7 +831,7 @@
     <section class="about">
         <h2>¿Qué es TOPVIBES?</h2>
         <p>TOPVIBES es una marca que lanza drops diferentes, sin encasillarse en un solo estilo. Nos inspiramos en la música, el deporte y todo lo que forma parte de la cultura actual. No buscamos vender por vender, sino soltar cosas que realmente nos molan y que conectan con la gente.</p>
-        <p>Empezamos con camisetas de fútbol de jugadores como Messi, Neymar y CR7, y después sacamos una colección de osos basada en el álbum Graduation de Kanye West. Vendemos a través de Vinted y Wallapop, pero esto es solo el principio. Cada drop es distinto al anterior, y siempre estamos preparando algo nuevo.</p>
+        <p>Empezamos con camisetas de fútbol de jugadores como Messi, Neymar y CR7, después sacamos una colección de osos basada en el álbum Graduation de Kanye West, y ahora presentamos un drop de camisetas únicas inspiradas en artistas como Travis Scott, Playboi Carti, Quevedo, Kendrick Lamar, Drake y Kanye West.Vendemos a través de Vinted y Wallapop, pero esto es solo el principio. Cada drop es distinto al anterior, y siempre estamos preparando algo nuevo.</p>
         <div class="features">
             <div class="feature-box">
                 <i class="fas fa-money-bill-wave"></i>
@@ -885,8 +928,21 @@
             <p id="shirtDetailPrice" class="shirt-detail-price"></p>
             <p class="shirt-detail-platform">Selecciona tu plataforma preferida para comprar:</p>
             <div class="shirt-detail-buttons">
-                <a id="vintedLink" href="#" class="cta-button" target="_blank">Comprar en Vinted</a>
+                <button id="vintedButton" class="cta-button">Comprar en Vinted</button>
                 <a id="wallapopLink" href="#" class="cta-button" target="_blank">Comprar en Wallapop</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Modal for Vinted Link Selection -->
+    <div id="vintedModal" class="vinted-modal">
+        <div class="vinted-modal-content">
+            <span class="close">&times;</span>
+            <h2>Seleccionar Enlace de Vinted</h2>
+            <p>Elige una de las opciones para comprar en Vinted:</p>
+            <div class="vinted-modal-buttons">
+                <a id="vintedLink1" href="#" class="cta-button" target="_blank">Opción 1</a>
+                <a id="vintedLink2" href="#" class="cta-button" target="_blank">Opción 2</a>
             </div>
         </div>
     </div>
@@ -982,11 +1038,13 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/jebq36.jpg',
-                    'https://files.catbox.moe/jebq36.jpg',
-                    'https://files.catbox.moe/jebq36.jpg',
-                    'https://files.catbox.moe/jebq36.jpg'
+                    'https://files.catbox.moe/ax2bgv.jpg',
+                    'https://files.catbox.moe/gjrrk1.jpg'
                 ],
-                vinted: 'https://vinted.com/items/7129804695-camiseta-travis-scott-negra-top-vibes',
+                vintedLinks: [
+                    'https://vinted.com/items/7129804695-camiseta-travis-scott-negra-top-vibes',
+                    'https://vinted.com/items/7129752813-camiseta-travis-scott-inspiradas-en-los-albumes-camiseta-rapero-merch'
+                ],
                 wallapop: 'https://wallapop.com/item/camiseta-travis-scott-inspirada-en-albumes-1177538052?utm_medium=AppShare&utm_source=ShareItem'
             },
             'kanye-west': {
@@ -1006,12 +1064,13 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/n9gr3b.jpg',
-                    'https://files.catbox.moe/n9gr3b.jpg',
-                    'https://files.catbox.moe/n9gr3b.jpg',
-                    'https://files.catbox.moe/n9gr3b.jpg'
+                    'https://files.catbox.moe/viuc5b.jpg'
                 ],
-                vinted: 'https://vinted.com/kanye-west',
-                wallapop: 'https://wallapop.com/kanye-west'
+                vintedLinks: [
+                    'https://vinted.com/items/7129862787-camiseta-negra-kanye-west-top-vibes',
+                    'https://vinted.com/items/7129981776-camiseta-kanye-west-topvibes'
+                ],
+                wallapop: 'https://wallapop.com/item/camiseta-kanye-west-negra-1177553048?utm_medium=AppShare&utm_source=ShareItem'
             },
             'quevedo': {
                 name: 'Quevedo',
@@ -1030,12 +1089,14 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/mq4dbc.jpg',
-                    'https://files.catbox.moe/mq4dbc.jpg',
-                    'https://files.catbox.moe/mq4dbc.jpg',
-                    'https://files.catbox.moe/mq4dbc.jpg'
+                    'https://files.catbox.moe/43ddm1.jpg',
+                    'https://files.catbox.moe/o59ewc.jpg'
                 ],
-                vinted: 'https://vinted.com/quevedo',
-                wallapop: 'https://wallapop.com/quevedo'
+                vintedLinks: [
+                    'https://vinted.com/items/7129833371-camiseta-quevedo-cancion-la-ultima-topvibes',
+                    'https://vinted.com/items/7130620834-camiseta-quevedo-negro-top-vibes'
+                ],
+                wallapop: 'https://wallapop.com/item/camiseta-quevedo-negra-la-ultima-barra-censurada-1177553748?utm_medium=AppShare&utm_source=ShareItem'
             },
             'playboi-carti': {
                 name: 'Playboi Carti',
@@ -1054,12 +1115,13 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/ghb8e4.jpg',
-                    'https://files.catbox.moe/ghb8e4.jpg',
-                    'https://files.catbox.moe/ghb8e4.jpg',
-                    'https://files.catbox.moe/ghb8e4.jpg'
+                    'https://files.catbox.moe/eezkv6.jpg'
                 ],
-                vinted: 'https://vinted.com/playboi-carti',
-                wallapop: 'https://wallapop.com/playboi-carti'
+                vintedLinks: [
+                    'https://vinted.com/items/7129847714-camiseta-playboi-carti-negra-top-vibes',
+                    'https://vinted.com/items/7130320619-camiseta-playboicarti-amantes-del-rap-trap-merch-playboicarti-camiseta-topvibed'
+                ],
+                wallapop: 'https://wallapop.com/item/playboi-carti-merch-camiseta-negra-1177554656?utm_medium=AppShare&utm_source=ShareItem'
             },
             'kendrick-lamar': {
                 name: 'Kendrick Lamar',
@@ -1078,12 +1140,13 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/sa521h.jpg',
-                    'https://files.catbox.moe/sa521h.jpg',
-                    'https://files.catbox.moe/sa521h.jpg',
-                    'https://files.catbox.moe/sa521h.jpg'
+                    'https://files.catbox.moe/d27kaj.jpg'
                 ],
-                vinted: 'https://vinted.com/kendrick-lamar',
-                wallapop: 'https://wallapop.com/kendrick-lamar'
+                vintedLinks: [
+                    'https://vinted.com/items/7129831487-camiseta-kendrick-lamar-negra-top-vibes',
+                    'https://vinted.com/items/7130241869-camiseta-kendrick-lamar-album-damn-merch-artista'
+                ],
+                wallapop: 'https://wallapop.com/item/camiseta-kendrick-lamar-negra-1177552441?utm_medium=AppShare&utm_source=ShareItem'
             },
             'drake': {
                 name: 'Drake',
@@ -1102,21 +1165,25 @@
                 price: '24.99€',
                 photos: [
                     'https://files.catbox.moe/3b9llp.jpg',
-                    'https://files.catbox.moe/3b9llp.jpg',
-                    'https://files.catbox.moe/3b9llp.jpg',
-                    'https://files.catbox.moe/3b9llp.jpg'
+                    'https://files.catbox.moe/tdjnyj.jpg'
                 ],
-                vinted: 'https://vinted.com/drake',
-                wallapop: 'https://wallapop.com/drake'
+                vintedLinks: [
+                    'https://vinted.com/items/7129822256-camiseta-drake-top-vibes-blanca',
+                    'https://vinted.com/items/7130074286-camiseta-topvibes-drake-con-firma'
+                ],
+                wallapop: 'https://wallapop.com/item/camiseta-drake-con-firma-1177551844?utm_medium=AppShare&utm_source=ShareItem'
             }
         };
 
         let currentArtist = '';
         let currentPhotoIndex = 0;
         let scrollPosition = 0;
-        const modal = document.getElementById('shirtModal');
-        const modalContent = document.querySelector('.modal-content');
-        const closeBtn = document.getElementsByClassName('close')[0];
+        const shirtModal = document.getElementById('shirtModal');
+        const shirtModalContent = document.querySelector('.modal-content');
+        const vintedModal = document.getElementById('vintedModal');
+        const vintedModalContent = document.querySelector('.vinted-modal-content');
+        const closeShirtModalBtn = shirtModal.getElementsByClassName('close')[0];
+        const closeVintedModalBtn = vintedModal.getElementsByClassName('close')[0];
 
         function showShirtDetail(artist, event) {
             if (event) event.preventDefault();
@@ -1148,7 +1215,8 @@
             document.getElementById('shirtDetailSizeInfo').textContent = data.sizeInfo;
             document.getElementById('shirtDetailPdfLink').href = data.pdfLink;
             document.getElementById('shirtDetailPrice').textContent = data.price;
-            document.getElementById('vintedLink').href = data.vinted;
+            document.getElementById('vintedLink1').href = data.vintedLinks[0];
+            document.getElementById('vintedLink2').href = data.vintedLinks[1];
             document.getElementById('wallapopLink').href = data.wallapop;
             const carouselInner = document.getElementById('carouselInner');
             carouselInner.innerHTML = '';
@@ -1171,7 +1239,31 @@
                 carouselDots.appendChild(dot);
             });
             updateCarousel();
-            modal.style.display = 'block';
+            shirtModal.style.display = 'block';
+        }
+
+        function showVintedModal() {
+            vintedModal.style.display = 'block';
+        }
+
+        function closeShirtModal() {
+            shirtModalContent.classList.add('closing');
+            setTimeout(() => {
+                shirtModal.style.display = 'none';
+                shirtModalContent.classList.remove('closing');
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                window.scrollTo(0, scrollPosition);
+            }, 300);
+        }
+
+        function closeVintedModal() {
+            vintedModalContent.classList.add('closing');
+            setTimeout(() => {
+                vintedModal.style.display = 'none';
+                vintedModalContent.classList.remove('closing');
+            }, 300);
         }
 
         function updateCarousel() {
@@ -1189,25 +1281,19 @@
             updateCarousel();
         }
 
-        function closeModal() {
-            modalContent.classList.add('closing');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                modalContent.classList.remove('closing');
-                document.body.style.position = '';
-                document.body.style.top = '';
-                document.body.style.width = '';
-                window.scrollTo(0, scrollPosition);
-            }, 300);
-        }
-
-        closeBtn.onclick = closeModal;
+        closeShirtModalBtn.onclick = closeShirtModal;
+        closeVintedModalBtn.onclick = closeVintedModal;
 
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
+            if (event.target == shirtModal) {
+                closeShirtModal();
+            }
+            if (event.target == vintedModal) {
+                closeVintedModal();
             }
         };
+
+        document.getElementById('vintedButton').onclick = showVintedModal;
 
         function scrollToShirts() {
             const shirtsSection = document.getElementById('shirts-section');
