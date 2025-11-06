@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -127,6 +88,36 @@
         @keyframes modalClose {
             from { transform: scale(1); opacity: 1; }
             to { transform: scale(0.7); opacity: 0; }
+        }
+
+        /* Animación de rebaja */
+        @keyframes strikeThrough {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .old-price {
+            position: relative;
+            color: #aaa;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+
+        .old-price::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff3333;
+            animation: strikeThrough 1s ease-out forwards;
+        }
+
+        .new-price {
+            color: #ff3333;
+            font-weight: bold;
+            animation: scaleIn 0.6s ease-out 0.8s both;
         }
 
         header {
@@ -384,6 +375,9 @@
         }
 
         .shirt-card .price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1rem;
             margin-bottom: 15px;
             opacity: 0.9;
@@ -605,9 +599,11 @@
         }
 
         .shirt-detail-price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2rem;
             margin-bottom: 20px;
-            color: #ff3333;
         }
 
         .shirt-detail-platform {
@@ -868,37 +864,37 @@
                 <img src="https://files.catbox.moe/jebq36.jpg" alt="Camiseta Travis Scott">
                 <hr class="card-divider">
                 <h3>Travis Scott</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
             <div class="shirt-card" onclick="showShirtDetail('kanye-west', event)">
                 <img src="https://files.catbox.moe/n9gr3b.jpg" alt="Camiseta Kanye West">
                 <hr class="card-divider">
                 <h3>Kanye West</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
             <div class="shirt-card" onclick="showShirtDetail('quevedo', event)">
                 <img src="https://files.catbox.moe/mq4dbc.jpg" alt="Camiseta Quevedo">
                 <hr class="card-divider">
                 <h3>Quevedo</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
             <div class="shirt-card" onclick="showShirtDetail('playboi-carti', event)">
                 <img src="https://files.catbox.moe/ghb8e4.jpg" alt="Camiseta Playboi Carti">
                 <hr class="card-divider">
                 <h3>Playboi Carti</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
             <div class="shirt-card" onclick="showShirtDetail('kendrick-lamar', event)">
                 <img src="https://files.catbox.moe/sa521h.jpg" alt="Camiseta Kendrick Lamar">
                 <hr class="card-divider">
                 <h3>Kendrick Lamar</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
             <div class="shirt-card" onclick="showShirtDetail('drake', event)">
                 <img src="https://files.catbox.moe/3b9llp.jpg" alt="Camiseta Drake">
                 <hr class="card-divider">
                 <h3>Drake</h3>
-                <p class="price">24.99€</p>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
             </div>
         </div>
     </section>
@@ -1035,7 +1031,7 @@
                 },
                 sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/jebq36.jpg',
                     'https://files.catbox.moe/ax2bgv.jpg',
@@ -1061,7 +1057,7 @@
                 },
                 sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/n9gr3b.jpg',
                     'https://files.catbox.moe/viuc5b.jpg'
@@ -1086,7 +1082,7 @@
                 },
                 sizeInfo: 'Talla: L (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/mq4dbc.jpg',
                     'https://files.catbox.moe/43ddm1.jpg',
@@ -1112,7 +1108,7 @@
                 },
                 sizeInfo: 'Talla: L (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/ghb8e4.jpg',
                     'https://files.catbox.moe/eezkv6.jpg'
@@ -1137,7 +1133,7 @@
                 },
                 sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/sa521h.jpg',
                     'https://files.catbox.moe/d27kaj.jpg'
@@ -1162,7 +1158,7 @@
                 },
                 sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
                 pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '24.99€',
+                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
                 photos: [
                     'https://files.catbox.moe/3b9llp.jpg',
                     'https://files.catbox.moe/tdjnyj.jpg'
@@ -1214,7 +1210,7 @@
             document.getElementById('shirtDetailClosing').style.display = data.description.closing ? 'block' : 'none';
             document.getElementById('shirtDetailSizeInfo').textContent = data.sizeInfo;
             document.getElementById('shirtDetailPdfLink').href = data.pdfLink;
-            document.getElementById('shirtDetailPrice').textContent = data.price;
+            document.getElementById('shirtDetailPrice').innerHTML = data.price;
             document.getElementById('vintedLink1').href = data.vintedLinks[0];
             document.getElementById('vintedLink2').href = data.vintedLinks[1];
             document.getElementById('wallapopLink').href = data.wallapop;
