@@ -90,7 +90,6 @@
             to { transform: scale(0.7); opacity: 0; }
         }
 
-        /* Animación de rebaja */
         @keyframes strikeThrough {
             from { width: 0; }
             to { width: 100%; }
@@ -273,11 +272,6 @@
         .feature-box p {
             font-size: 0.8rem;
             opacity: 0.9;
-        }
-
-        .fa-box::before {
-            position: relative;
-            z-index: 1;
         }
 
         .telegram-section {
@@ -762,46 +756,27 @@
         }
 
         @media (max-width: 600px) {
-            header { padding: 10px 15px; animation-duration: 0.6s; }
+            header { padding: 10px 15px; }
             .logo img { height: 30px; }
             .hero { height: 40vh; padding-top: 50px; }
-            .hero-content { animation-duration: 0.6s; }
             .hero h2 { font-size: 1.6rem; }
-            .hero p { font-size: 0.8rem; max-width: 90%; }
+            .hero p { font-size: 0.8rem; }
             .cta-button { padding: 10px 25px; font-size: 1rem; }
-            .about { padding: 40px 15px; }
-            .about h2 { font-size: 1.5rem; animation-duration: 0.6s; }
-            .about p { font-size: 0.8rem; animation-duration: 0.6s; }
+            .about, .telegram-section, .discount-code, .shirts-section { padding: 40px 15px; }
+            .about h2, .telegram-section h2, .code-header h2, .discount-form h2, .shirts-section h2 { font-size: 1.5rem; }
+            .about p, .telegram-section p, .code-header p, .discount-form p { font-size: 0.8rem; }
             .features { flex-direction: column; align-items: center; }
-            .feature-box { width: 100%; max-width: 300px; animation-duration: 0.6s; }
-            .telegram-section { padding: 40px 15px; }
-            .telegram-section h2 { font-size: 1.5rem; }
-            .telegram-section p { font-size: 0.8rem; }
-            .discount-code { padding: 40px 15px; }
-            .code-header h2, .discount-form h2, .vinted-modal h2 { font-size: 1.5rem; }
-            .code-header p, .discount-form p { font-size: 0.8rem; }
+            .feature-box { width: 100%; max-width: 300px; }
             .code-form input { width: 100%; max-width: 250px; }
-            .discount-form { max-width: 100%; }
-            .shirts-section { padding: 40px 15px; }
-            .shirts-section h2 { font-size: 1.5rem; }
             .shirts-grid { grid-template-columns: repeat(2, 1fr); }
             .shirt-card { width: 100%; }
             .shirt-card img { height: 150px; }
-            .modal-content { width: 95%; max-width: 350px; }
-            .vinted-modal-content { width: 95%; max-width: 300px; }
-            .shirt-detail-carousel { max-width: 100%; }
+            .modal-content, .vinted-modal-content { width: 95%; max-width: 350px; }
             .carousel-item img { max-height: 200px; }
-            .shirt-detail-buttons { flex-direction: column; gap: 10px; }
-            .shirt-detail-buttons .cta-button { width: 100%; }
-            .vinted-modal-buttons { flex-direction: column; }
-            .vinted-modal-buttons .cta-button { width: 100%; }
-            .shirt-detail-intro, .shirt-detail-details, .shirt-detail-closing, .shirt-detail-size-info { font-size: 0.8rem; }
-            .shirt-detail-details-header { font-size: 1rem; }
-            .shirt-detail-details { padding: 10px 15px; }
-            .shirt-detail-pdf-link { font-size: 0.8rem; padding: 6px 12px; }
+            .shirt-detail-buttons, .vinted-modal-buttons { flex-direction: column; gap: 10px; }
+            .shirt-detail-buttons .cta-button, .vinted-modal-buttons .cta-button { width: 100%; }
             .close { font-size: 28px; }
-            .footer { padding: 20px 15px; animation-duration: 0.6s; }
-            .footer-content p { font-size: 0.7rem; }
+            .footer { padding: 20px 15px; }
             .social-links li a i { font-size: 1.2rem; }
         }
     </style>
@@ -826,8 +801,8 @@
     <!-- About Section -->
     <section class="about">
         <h2>¿Qué es TOPVIBES?</h2>
-        <p>TOPVIBES es una marca que lanza drops diferentes, sin encasillarse en un solo estilo. Nos inspiramos en la música, el deporte y todo lo que forma parte de la cultura actual. No buscamos vender por vender, sino soltar cosas que realmente nos molan y que conectan con la gente.</p>
-        <p>Empezamos con camisetas de fútbol de jugadores como Messi, Neymar y CR7, después sacamos una colección de osos basada en el álbum Graduation de Kanye West, y ahora presentamos un drop de camisetas únicas inspiradas en artistas como Travis Scott, Playboi Carti, Quevedo, Kendrick Lamar, Drake y Kanye West.Vendemos a través de Vinted y Wallapop, pero esto es solo el principio. Cada drop es distinto al anterior, y siempre estamos preparando algo nuevo.</p>
+        <p>TOPVIBES es una marca que lanza drops diferentes, sin encasillarse en un solo estilo. Nos inspiramos en la música, el deporte y todo lo que forma parte de la cultura actual.</p>
+        <p>Empezamos con camisetas de fútbol, luego osos de Kanye West, y ahora este drop de artistas. Vendemos en Vinted y Wallapop. Cada drop es único.</p>
         <div class="features">
             <div class="feature-box">
                 <i class="fas fa-money-bill-wave"></i>
@@ -860,59 +835,20 @@
     <section class="shirts-section" id="shirts-section">
         <h2>Camisetas de Artistas</h2>
         <div class="shirts-grid" id="shirtsGrid">
-            <div class="shirt-card" onclick="showShirtDetail('travis-scott', event)">
-                <img src="https://files.catbox.moe/jebq36.jpg" alt="Camiseta Travis Scott">
-                <hr class="card-divider">
-                <h3>Travis Scott</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
-            <div class="shirt-card" onclick="showShirtDetail('kanye-west', event)">
-                <img src="https://files.catbox.moe/n9gr3b.jpg" alt="Camiseta Kanye West">
-                <hr class="card-divider">
-                <h3>Kanye West</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
-            <div class="shirt-card" onclick="showShirtDetail('quevedo', event)">
-                <img src="https://files.catbox.moe/mq4dbc.jpg" alt="Camiseta Quevedo">
-                <hr class="card-divider">
-                <h3>Quevedo</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
-            <div class="shirt-card" onclick="showShirtDetail('playboi-carti', event)">
-                <img src="https://files.catbox.moe/ghb8e4.jpg" alt="Camiseta Playboi Carti">
-                <hr class="card-divider">
-                <h3>Playboi Carti</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
-            <div class="shirt-card" onclick="showShirtDetail('kendrick-lamar', event)">
-                <img src="https://files.catbox.moe/sa521h.jpg" alt="Camiseta Kendrick Lamar">
-                <hr class="card-divider">
-                <h3>Kendrick Lamar</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
-            <div class="shirt-card" onclick="showShirtDetail('drake', event)">
-                <img src="https://files.catbox.moe/3b9llp.jpg" alt="Camiseta Drake">
-                <hr class="card-divider">
-                <h3>Drake</h3>
-                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
-            </div>
+            <!-- Camisetas se generan con JS -->
         </div>
     </section>
 
     <!-- Modal for Shirt Detail -->
     <div id="shirtModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2 id="shirtDetailTitle"></h2>
             <div class="shirt-detail-carousel">
-                <div class="carousel-inner" id="carouselInner">
-                    <!-- Photos will be added dynamically -->
-                </div>
-                <button class="carousel-control prev" onclick="changePhoto(-1)">&lt;</button>
-                <button class="carousel-control next" onclick="changePhoto(1)">&gt;</button>
-                <div class="carousel-dots" id="carouselDots">
-                    <!-- Dots will be added dynamically -->
-                </div>
+                <div class="carousel-inner" id="carouselInner"></div>
+                <button class="carousel-control prev" onclick="changePhoto(-1)">‹</button>
+                <button class="carousel-control next" onclick="changePhoto(1)">›</button>
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
             <hr class="modal-divider">
             <p id="shirtDetailIntro" class="shirt-detail-intro"></p>
@@ -933,7 +869,7 @@
     <!-- Secondary Modal for Vinted Link Selection -->
     <div id="vintedModal" class="vinted-modal">
         <div class="vinted-modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>Seleccionar Enlace de Vinted</h2>
             <p>Elige una de las opciones para comprar en Vinted:</p>
             <div class="vinted-modal-buttons">
@@ -980,397 +916,213 @@
         </div>
     </footer>
 
-    <!-- JavaScript for File Processing -->
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-            return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-                try {
-                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                    var firstSheetName = workbook.SheetNames[0];
-                    var worksheet = workbook.Sheets[firstSheetName];
-                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                    var filteredData = jsonData.filter(row => row.some(filledCell));
-                    var headerRowIndex = filteredData.findIndex((row, index) =>
-                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                    );
-                    if (headerRowIndex === -1 || headerRowIndex > 25) {
-                        headerRowIndex = 0;
-                    }
-                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                    return csv;
-                } catch (e) {
-                    console.error(e);
-                    return "";
-                }
-            }
-            return gk_fileData[filename] || "";
-        }
+        (function() {
+            emailjs.init("bcud2NgRliClqVivQ");
+        })();
     </script>
 
-    <!-- JavaScript for Shirt Detail Modal and Scroll -->
+    <!-- JS DINÁMICO -->
     <script>
-        const shirtData = {
-            'travis-scott': {
-                name: 'Travis Scott',
-                description: {
-                    intro: 'Destaca tu estilo urbano con esta camiseta negra que presenta un estampado frontal único: la silueta de la cabeza de Travis Scott, rellena con un collage de sus distintos álbumes. Una prenda que fusiona arte y música, ideal para los fans del hip-hop y la moda contemporánea que buscan un diseño original y llamativo.',
-                    details: [
-                        'Color: Negro',
-                        'Estampado: Silueta de Travis Scott con collage de sus álbumes en el interior',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta versátil que combina comodidad y estilo, perfecta para looks casuales o para destacar con un toque creativo en cualquier ocasión.'
-                },
-                sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/jebq36.jpg',
-                    'https://files.catbox.moe/ax2bgv.jpg',
-                    'https://files.catbox.moe/gjrrk1.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129804695-camiseta-travis-scott-negra-top-vibes',
-                    'https://vinted.com/items/7129752813-camiseta-travis-scott-inspiradas-en-los-albumes-camiseta-rapero-merch'
-                ],
-                wallapop: 'https://wallapop.com/item/camiseta-travis-scott-inspirada-en-albumes-1177538052?utm_medium=AppShare&utm_source=ShareItem'
-            },
-            'kanye-west': {
-                name: 'Kanye West',
-                description: {
-                    intro: 'Añade un aire icónico a tu vestuario urbano con esta camiseta negra que presenta un estampado frontal de Kanye West. Su diseño en alto contraste resalta la figura del artista y aporta un toque moderno y atrevido a cualquier look.',
-                    details: [
-                        'Color: Negro',
-                        'Estampado: Fotografía de Kanye West en el centro',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta versátil que combina comodidad y estilo, perfecta para looks casuales o para destacar con un diseño icónico de la música urbana.'
-                },
-                sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/n9gr3b.jpg',
-                    'https://files.catbox.moe/viuc5b.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129862787-camiseta-negra-kanye-west-top-vibes',
-                    'https://vinted.com/items/7129981776-camiseta-kanye-west-topvibes'
-                ],
-                wallapop: 'https://wallapop.com/item/camiseta-kanye-west-negra-1177553048?utm_medium=AppShare&utm_source=ShareItem'
-            },
-            'quevedo': {
-                name: 'Quevedo',
-                description: {
-                    intro: 'Dale un giro urbano a tu estilo con esta camiseta negra que presenta un estampado en blanco y negro inspirado en su canción "La Última". La imagen incluye una barra de censura sobre los ojos, creando un efecto misterioso y atrevido que refleja la estética moderna del artista y la cultura del streetwear.',
-                    details: [
-                        'Color: Negro',
-                        'Estampado: Fotografía de Quevedo en blanco y negro con una barra de censura sobre los ojos',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta que combina comodidad y estilo, perfecta para looks casuales o para destacar con un toque rebelde y artístico en cualquier ocasión.'
-                },
-                sizeInfo: 'Talla: L (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/mq4dbc.jpg',
-                    'https://files.catbox.moe/43ddm1.jpg',
-                    'https://files.catbox.moe/o59ewc.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129833371-camiseta-quevedo-cancion-la-ultima-topvibes',
-                    'https://vinted.com/items/7130620834-camiseta-quevedo-negro-top-vibes'
-                ],
-                wallapop: 'https://wallapop.com/item/camiseta-quevedo-negra-la-ultima-barra-censurada-1177553748?utm_medium=AppShare&utm_source=ShareItem'
-            },
-            'playboi-carti': {
-                name: 'Playboi Carti',
-                description: {
-                    intro: 'Añade un toque vanguardista a tu estilo urbano con esta camiseta negra que presenta un estampado frontal de Playboi Carti. La imagen captura la esencia única del artista, combinando estética moderna y streetwear para crear una prenda que destaca en cualquier look.',
-                    details: [
-                        'Color: Negro',
-                        'Estampado: Fotografía de Playboi Carti en el centro',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta versátil que combina comodidad y estilo, perfecta para looks casuales o para destacar con un toque único y atrevido inspirado en la música y la moda urbana.'
-                },
-                sizeInfo: 'Talla: L (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/ghb8e4.jpg',
-                    'https://files.catbox.moe/eezkv6.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129847714-camiseta-playboi-carti-negra-top-vibes',
-                    'https://vinted.com/items/7130320619-camiseta-playboicarti-amantes-del-rap-trap-merch-playboicarti-camiseta-topvibed'
-                ],
-                wallapop: 'https://wallapop.com/item/playboi-carti-merch-camiseta-negra-1177554656?utm_medium=AppShare&utm_source=ShareItem'
-            },
-            'kendrick-lamar': {
-                name: 'Kendrick Lamar',
-                description: {
-                    intro: 'Añade un toque distintivo a tu estilo con esta camiseta en color negro, que presenta un estampado frontal de Kendrick Lamar, uno de los artistas más influyentes de la música contemporánea. Su diseño minimalista y de alto contraste la convierte en una prenda esencial para quienes valoran tanto el hip-hop como la moda urbana.',
-                    details: [
-                        'Color: Negro',
-                        'Estampado: Fotografía de Kendrick Lamar en el centro',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta versátil que combina comodidad y estilo, perfecta para look casuales o para dar un giro único a cualquier ocasión.'
-                },
-                sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/sa521h.jpg',
-                    'https://files.catbox.moe/d27kaj.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129831487-camiseta-kendrick-lamar-negra-top-vibes',
-                    'https://vinted.com/items/7130241869-camiseta-kendrick-lamar-album-damn-merch-artista'
-                ],
-                wallapop: 'https://wallapop.com/item/camiseta-kendrick-lamar-negra-1177552441?utm_medium=AppShare&utm_source=ShareItem'
-            },
-            'drake': {
-                name: 'Drake',
-                description: {
-                    intro: 'Eleva tu estilo con esta camiseta blanca que presenta un estampado frontal de Drake junto con su firma, creando un diseño elegante y minimalista que combina perfectamente la música y la moda urbana. Ideal para fans del artista que buscan una prenda versátil y con personalidad.',
-                    details: [
-                        'Color: Blanco',
-                        'Estampado: Fotografía de Drake con su firma en el centro',
-                        'Material: Algodón de alta calidad, suave y duradero',
-                        'Corte: Unisex, estilo oversize clásico'
-                    ],
-                    closing: 'Una camiseta perfecta para looks casuales o para destacar con un toque sutil y sofisticado inspirado en Drake.'
-                },
-                sizeInfo: 'Talla: M (consulta el catálogo de medidas para mayor precisión)',
-                pdfLink: 'https://files.catbox.moe/u93uht.pdf',
-                price: '<span class="old-price">24.99€</span><span class="new-price">19.99€</span>',
-                photos: [
-                    'https://files.catbox.moe/3b9llp.jpg',
-                    'https://files.catbox.moe/tdjnyj.jpg'
-                ],
-                vintedLinks: [
-                    'https://vinted.com/items/7129822256-camiseta-drake-top-vibes-blanca',
-                    'https://vinted.com/items/7130074286-camiseta-topvibes-drake-con-firma'
-                ],
-                wallapop: 'https://wallapop.com/item/camiseta-drake-con-firma-1177551844?utm_medium=AppShare&utm_source=ShareItem'
-            }
-        };
-
-        let currentArtist = '';
-        let currentPhotoIndex = 0;
+        const API = 'https://topvibes-production.up.railway.app';
+        let validCodes = [];
+        let shirtData = {};
         let scrollPosition = 0;
-        const shirtModal = document.getElementById('shirtModal');
-        const shirtModalContent = document.querySelector('.modal-content');
-        const vintedModal = document.getElementById('vintedModal');
-        const vintedModalContent = document.querySelector('.vinted-modal-content');
-        const closeShirtModalBtn = shirtModal.getElementsByClassName('close')[0];
-        const closeVintedModalBtn = vintedModal.getElementsByClassName('close')[0];
 
-        function showShirtDetail(artist, event) {
-            if (event) event.preventDefault();
-            scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollPosition}px`;
-            document.body.style.width = '100%';
-            currentArtist = artist;
-            currentPhotoIndex = 0;
-            const data = shirtData[artist];
+        async function loadData() {
+            try {
+                const res = await fetch(API + '/api/data');
+                const data = await res.json();
+
+                // HERO
+                document.querySelector('.hero h2').textContent = data.hero?.title || 'DROP #003';
+                document.querySelector('.hero p').textContent = data.hero?.desc || '';
+
+                // ABOUT
+                document.querySelector('.about h2').textContent = data.about?.title || '¿Qué es TOPVIBES?';
+                const aboutPs = document.querySelectorAll('.about p');
+                aboutPs[0].textContent = data.about?.desc1 || '';
+                aboutPs[1].textContent = data.about?.desc2 || '';
+
+                // TELEGRAM
+                document.querySelector('.telegram-section h2').textContent = data.telegram?.title || '';
+                document.querySelector('.telegram-section p').textContent = data.telegram?.desc || '';
+                document.querySelector('.telegram-section a').href = data.telegram?.link || '#';
+
+                // SHIRTS
+                document.querySelector('.shirts-section h2').textContent = data.shirtsTitle || '';
+                const grid = document.getElementById('shirtsGrid');
+                grid.innerHTML = '';
+                shirtData = {};
+                validCodes = data.discounts?.validCodes || [];
+
+                (data.shirts || []).forEach(s => {
+                    const card = document.createElement('div');
+                    card.className = 'shirt-card';
+                    card.onclick = () => showShirtDetail(s.id);
+                    card.innerHTML = `
+                        <img src="${s.img}" alt="${s.name}">
+                        <hr class="card-divider">
+                        <h3>${s.name}</h3>
+                        <p class="price"><span class="old-price">${s.oldPrice}€</span><span class="new-price">${s.newPrice}€</span></p>
+                    `;
+                    grid.appendChild(card);
+
+                    shirtData[s.id] = {
+                        name: s.name,
+                        description: s.desc,
+                        sizeInfo: `Talla: ${s.size}`,
+                        pdfLink: s.pdf,
+                        price: `<span class="old-price">${s.oldPrice}€</span><span class="new-price">${s.newPrice}€</span>`,
+                        photos: s.photos,
+                        vintedLinks: [s.vinted1, s.vinted2],
+                        wallapop: s.wallapop
+                    };
+                });
+
+                // DISCOUNTS
+                document.querySelector('#codeHeader h2').textContent = data.discounts?.title || '';
+                document.querySelector('#codeHeader p').textContent = data.discounts?.desc || '';
+
+                // FOOTER
+                document.querySelector('footer p').innerHTML = `© ${data.footer?.year || '2025'} TOPVIBES. Todos los derechos reservados.`;
+                document.querySelectorAll('.social-links a')[0].href = data.footer?.ig || '#';
+                document.querySelectorAll('.social-links a')[1].href = data.footer?.tt || '#';
+                document.querySelectorAll('.social-links a')[2].href = data.footer?.yt || '#';
+
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // MODAL FUNCTIONS
+        function showShirtDetail(id) {
+            scrollPosition = window.pageYOffset;
+            document.body.classList.add('modal-open');
+            const data = shirtData[id];
+            if (!data) return;
+
             document.getElementById('shirtDetailTitle').textContent = data.name;
             document.getElementById('shirtDetailIntro').textContent = data.description.intro;
-            const detailsList = document.getElementById('shirtDetailDetails');
-            detailsList.innerHTML = '';
-            if (data.description.details.length > 0) {
-                data.description.details.forEach(detail => {
-                    const li = document.createElement('li');
-                    li.textContent = detail;
-                    detailsList.appendChild(li);
-                });
-                detailsList.style.display = 'block';
-                document.getElementById('shirtDetailDetailsHeader').style.display = 'block';
-            } else {
-                detailsList.style.display = 'none';
-                document.getElementById('shirtDetailDetailsHeader').style.display = 'none';
-            }
-            document.getElementById('shirtDetailClosing').textContent = data.description.closing || '';
-            document.getElementById('shirtDetailClosing').style.display = data.description.closing ? 'block' : 'none';
+            const list = document.getElementById('shirtDetailDetails');
+            list.innerHTML = '';
+            data.description.details.forEach(d => {
+                const li = document.createElement('li');
+                li.textContent = d;
+                list.appendChild(li);
+            });
+            document.getElementById('shirtDetailClosing').textContent = data.description.closing;
             document.getElementById('shirtDetailSizeInfo').textContent = data.sizeInfo;
             document.getElementById('shirtDetailPdfLink').href = data.pdfLink;
             document.getElementById('shirtDetailPrice').innerHTML = data.price;
             document.getElementById('vintedLink1').href = data.vintedLinks[0];
             document.getElementById('vintedLink2').href = data.vintedLinks[1];
             document.getElementById('wallapopLink').href = data.wallapop;
-            const carouselInner = document.getElementById('carouselInner');
-            carouselInner.innerHTML = '';
-            data.photos.forEach(photo => {
-                const item = document.createElement('div');
-                item.classList.add('carousel-item');
-                item.innerHTML = `<img src="${photo}" alt="${data.name} Photo">`;
-                carouselInner.appendChild(item);
+
+            const inner = document.getElementById('carouselInner');
+            inner.innerHTML = '';
+            data.photos.forEach(p => {
+                inner.innerHTML += `<div class="carousel-item"><img src="${p}" alt="${data.name}"></div>`;
             });
-            const carouselDots = document.getElementById('carouselDots');
-            carouselDots.innerHTML = '';
-            data.photos.forEach((_, index) => {
+
+            const dots = document.getElementById('carouselDots');
+            dots.innerHTML = '';
+            data.photos.forEach((_, i) => {
                 const dot = document.createElement('span');
-                dot.classList.add('carousel-dot');
-                if (index === 0) dot.classList.add('active');
-                dot.onclick = () => {
-                    currentPhotoIndex = index;
-                    updateCarousel();
-                };
-                carouselDots.appendChild(dot);
+                dot.className = 'carousel-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => { currentPhotoIndex = i; updateCarousel(); };
+                dots.appendChild(dot);
             });
+
+            currentPhotoIndex = 0;
             updateCarousel();
-            shirtModal.style.display = 'block';
+            document.getElementById('shirtModal').style.display = 'block';
         }
 
-        function showVintedModal() {
-            vintedModal.style.display = 'block';
-        }
-
-        function closeShirtModal() {
-            shirtModalContent.classList.add('closing');
-            setTimeout(() => {
-                shirtModal.style.display = 'none';
-                shirtModalContent.classList.remove('closing');
-                document.body.style.position = '';
-                document.body.style.top = '';
-                document.body.style.width = '';
-                window.scrollTo(0, scrollPosition);
-            }, 300);
-        }
-
-        function closeVintedModal() {
-            vintedModalContent.classList.add('closing');
-            setTimeout(() => {
-                vintedModal.style.display = 'none';
-                vintedModalContent.classList.remove('closing');
-            }, 300);
-        }
-
+        let currentPhotoIndex = 0;
         function updateCarousel() {
-            const carouselInner = document.getElementById('carouselInner');
-            carouselInner.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-            const dots = document.querySelectorAll('.carousel-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentPhotoIndex);
-            });
+            document.getElementById('carouselInner').style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === currentPhotoIndex));
         }
 
-        function changePhoto(direction) {
-            const data = shirtData[currentArtist];
-            currentPhotoIndex = (currentPhotoIndex + direction + data.photos.length) % data.photos.length;
+        function changePhoto(dir) {
+            const photos = shirtData[Object.keys(shirtData)[0]]?.photos || [];
+            currentPhotoIndex = (currentPhotoIndex + dir + photos.length) % photos.length;
             updateCarousel();
         }
 
-        closeShirtModalBtn.onclick = closeShirtModal;
-        closeVintedModalBtn.onclick = closeVintedModal;
+        document.querySelectorAll('.close').forEach(btn => {
+            btn.onclick = () => {
+                document.body.classList.remove('modal-open');
+                document.getElementById('shirtModal').style.display = 'none';
+                document.getElementById('vintedModal').style.display = 'none';
+                window.scrollTo(0, scrollPosition);
+            };
+        });
 
-        window.onclick = function(event) {
-            if (event.target == shirtModal) {
-                closeShirtModal();
-            }
-            if (event.target == vintedModal) {
-                closeVintedModal();
+        window.onclick = e => {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('vinted-modal')) {
+                document.body.classList.remove('modal-open');
+                document.getElementById('shirtModal').style.display = 'none';
+                document.getElementById('vintedModal').style.display = 'none';
+                window.scrollTo(0, scrollPosition);
             }
         };
 
-        document.getElementById('vintedButton').onclick = showVintedModal;
+        document.getElementById('vintedButton').onclick = () => document.getElementById('vintedModal').style.display = 'block';
 
-        function scrollToShirts() {
-            const shirtsSection = document.getElementById('shirts-section');
-            shirtsSection.classList.add('animated');
-            shirtsSection.scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => {
-                shirtsSection.classList.remove('animated');
-            }, 800);
-        }
-    </script>
-
-    <!-- EmailJS SDK and Discount Code Functionality -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("bcud2NgRliClqVivQ");
-        })();
-
-        const validCodes = [
-            'M4S1T', 'BURRO', 'YOTAMBIENVIVOELDROP', 'D307', 'DROP003',
-            'SPRINT', 'TOP10', 'VIP2025', '#DROP003VIENEDURO', 'TOPVIBES25', 'CAST', 'INFLUENCERS',
-            'CHAPARRO', 'M7D5Z'
-        ];
-
-        document.getElementById('verifyCode').addEventListener('click', function() {
-            const codeInput = document.getElementById('discountCode').value.trim().toUpperCase();
-            const codeHeader = document.getElementById('codeHeader');
-            const codeForm = document.getElementById('codeForm');
-            const discountForm = document.getElementById('discountForm');
-            const codeMessage = document.getElementById('codeMessage');
-
-            if (validCodes.includes(codeInput)) {
-                codeHeader.classList.add('hidden');
-                codeForm.classList.add('hidden');
-                discountForm.classList.remove('hidden');
-                codeMessage.textContent = '';
+        document.getElementById('verifyCode').onclick = () => {
+            const code = document.getElementById('discountCode').value.trim().toUpperCase();
+            if (validCodes.includes(code)) {
+                document.getElementById('codeHeader').classList.add('hidden');
+                document.getElementById('codeForm').classList.add('hidden');
+                document.getElementById('discountForm').classList.remove('hidden');
             } else {
-                codeMessage.textContent = 'Código inválido. Por favor, intenta de nuevo.';
-                codeMessage.style.color = '#ff3333';
+                document.getElementById('codeMessage').textContent = 'Código inválido.';
             }
-        });
+        };
 
-        document.getElementById('userInfoForm').addEventListener('submit', function(e) {
+        document.getElementById('userInfoForm').onsubmit = e => {
             e.preventDefault();
-            const formMessage = document.getElementById('formMessage');
-            const codeHeader = document.getElementById('codeHeader');
-            const codeForm = document.getElementById('codeForm');
-            const discountForm = document.getElementById('discountForm');
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
-            const instagram = document.getElementById('instagram').value.trim();
-            const tiktok = document.getElementById('tiktok').value.trim();
+            const ig = document.getElementById('instagram').value.trim();
+            const tt = document.getElementById('tiktok').value.trim();
             const code = document.getElementById('discountCode').value.trim().toUpperCase();
 
             if (!name || !email) {
-                formMessage.textContent = 'Por favor, completa los campos obligatorios.';
+                document.getElementById('formMessage').textContent = 'Completa los campos obligatorios.';
                 return;
             }
 
             emailjs.send('service_it08vcq', 'template_tlbbzd8', {
                 from_name: name,
                 email: email,
-                instagram: instagram || 'No proporcionado',
-                tiktok: tiktok || 'No proporcionado',
+                instagram: ig || 'No proporcionado',
+                tiktok: tt || 'No proporcionado',
                 discount_code: code
-            }).then(
-                function(response) {
-                    formMessage.textContent = '¡Información enviada! Revisa tu correo para el descuento.';
-                    formMessage.style.color = '#00ff00';
-                    document.getElementById('userInfoForm').reset();
-                    document.getElementById('discountCode').value = '';
-                    discountForm.classList.add('hidden');
-                    codeHeader.classList.remove('hidden');
-                    codeForm.classList.remove('hidden');
-                },
-                function(error) {
-                    formMessage.textContent = 'Error al enviar. Intenta de nuevo.';
-                    console.error('EmailJS error:', error);
-                }
-            );
-        });
+            }).then(() => {
+                document.getElementById('formMessage').textContent = '¡Enviado! Revisa tu correo.';
+                document.getElementById('formMessage').style.color = '#00ff00';
+                document.getElementById('userInfoForm').reset();
+                setTimeout(() => {
+                    document.getElementById('discountForm').classList.add('hidden');
+                    document.getElementById('codeHeader').classList.remove('hidden');
+                    document.getElementById('codeForm').classList.remove('hidden');
+                }, 3000);
+            }).catch(() => {
+                document.getElementById('formMessage').textContent = 'Error. Intenta de nuevo.';
+            });
+        };
+
+        function scrollToShirts() {
+            document.getElementById('shirts-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        loadData();
     </script>
 </body>
 </html>
