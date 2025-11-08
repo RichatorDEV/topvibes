@@ -860,20 +860,59 @@
     <section class="shirts-section" id="shirts-section">
         <h2>Camisetas de Artistas</h2>
         <div class="shirts-grid" id="shirtsGrid">
-            <!-- SE GENERA CON JS -->
+            <div class="shirt-card" onclick="showShirtDetail('travis-scott', event)">
+                <img src="https://files.catbox.moe/jebq36.jpg" alt="Camiseta Travis Scott">
+                <hr class="card-divider">
+                <h3>Travis Scott</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
+            <div class="shirt-card" onclick="showShirtDetail('kanye-west', event)">
+                <img src="https://files.catbox.moe/n9gr3b.jpg" alt="Camiseta Kanye West">
+                <hr class="card-divider">
+                <h3>Kanye West</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
+            <div class="shirt-card" onclick="showShirtDetail('quevedo', event)">
+                <img src="https://files.catbox.moe/mq4dbc.jpg" alt="Camiseta Quevedo">
+                <hr class="card-divider">
+                <h3>Quevedo</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
+            <div class="shirt-card" onclick="showShirtDetail('playboi-carti', event)">
+                <img src="https://files.catbox.moe/ghb8e4.jpg" alt="Camiseta Playboi Carti">
+                <hr class="card-divider">
+                <h3>Playboi Carti</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
+            <div class="shirt-card" onclick="showShirtDetail('kendrick-lamar', event)">
+                <img src="https://files.catbox.moe/sa521h.jpg" alt="Camiseta Kendrick Lamar">
+                <hr class="card-divider">
+                <h3>Kendrick Lamar</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
+            <div class="shirt-card" onclick="showShirtDetail('drake', event)">
+                <img src="https://files.catbox.moe/3b9llp.jpg" alt="Camiseta Drake">
+                <hr class="card-divider">
+                <h3>Drake</h3>
+                <p class="price"><span class="old-price">24.99€</span><span class="new-price">19.99€</span></p>
+            </div>
         </div>
     </section>
 
     <!-- Modal for Shirt Detail -->
     <div id="shirtModal" class="modal">
         <div class="modal-content">
-            <span class="close">×</span>
+            <span class="close">&times;</span>
             <h2 id="shirtDetailTitle"></h2>
             <div class="shirt-detail-carousel">
-                <div class="carousel-inner" id="carouselInner"></div>
-                <button class="carousel-control prev" onclick="changePhoto(-1)">‹</button>
-                <button class="carousel-control next" onclick="changePhoto(1)">›</button>
-                <div class="carousel-dots" id="carouselDots"></div>
+                <div class="carousel-inner" id="carouselInner">
+                    <!-- Photos will be added dynamically -->
+                </div>
+                <button class="carousel-control prev" onclick="changePhoto(-1)">&lt;</button>
+                <button class="carousel-control next" onclick="changePhoto(1)">&gt;</button>
+                <div class="carousel-dots" id="carouselDots">
+                    <!-- Dots will be added dynamically -->
+                </div>
             </div>
             <hr class="modal-divider">
             <p id="shirtDetailIntro" class="shirt-detail-intro"></p>
@@ -894,7 +933,7 @@
     <!-- Secondary Modal for Vinted Link Selection -->
     <div id="vintedModal" class="vinted-modal">
         <div class="vinted-modal-content">
-            <span class="close">×</span>
+            <span class="close">&times;</span>
             <h2>Seleccionar Enlace de Vinted</h2>
             <p>Elige una de las opciones para comprar en Vinted:</p>
             <div class="vinted-modal-buttons">
@@ -941,7 +980,7 @@
         </div>
     </footer>
 
-    <!-- TU JS ORIGINAL (sin tocar) -->
+    <!-- JavaScript for File Processing -->
     <script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
@@ -975,7 +1014,7 @@
         }
     </script>
 
-    <!-- TU JS DE MODALES (sin tocar) -->
+    <!-- JavaScript for Shirt Detail Modal and Scroll -->
     <script>
         const shirtData = {
             'travis-scott': {
@@ -1332,81 +1371,6 @@
                 }
             );
         });
-    </script>
-
-    <!-- JS DINÁMICO (NUEVO) -->
-    <script>
-        const API = 'https://topvibes-production.up.railway.app';
-
-        // CARGAR DATOS DESDE DB
-        async function loadData() {
-            try {
-                const res = await fetch(API + '/api/data');
-                const data = await res.json();
-
-                // HERO
-                document.querySelector('.hero h2').textContent = data.hero?.title || 'DROP #003: CAMISETAS DE ARTISTAS';
-                document.querySelector('.hero p').textContent = data.hero?.desc || '';
-
-                // ABOUT
-                document.querySelector('.about h2').textContent = data.about?.title || '¿Qué es TOPVIBES?';
-                const ps = document.querySelectorAll('.about p');
-                ps[0].textContent = data.about?.desc1 || '';
-                ps[1].textContent = data.about?.desc2 || '';
-
-                // TELEGRAM
-                document.querySelector('.telegram-section h2').textContent = data.telegram?.title || '';
-                document.querySelector('.telegram-section p').textContent = data.telegram?.desc || '';
-                document.querySelector('.telegram-section a').href = data.telegram?.link || '#';
-
-                // SHIRTS TITLE
-                document.querySelector('.shirts-section h2').textContent = data.shirtsTitle || 'Camisetas de Artistas';
-
-                // SHIRTS GRID
-                const grid = document.getElementById('shirtsGrid');
-                grid.innerHTML = '';
-                (data.shirts || []).forEach(s => {
-                    const card = document.createElement('div');
-                    card.className = 'shirt-card';
-                    card.onclick = (e) => showShirtDetail(s.id, e);
-                    card.innerHTML = `
-                        <img src="${s.img}" alt="${s.name}">
-                        <hr class="card-divider">
-                        <h3>${s.name}</h3>
-                        <p class="price"><span class="old-price">${s.oldPrice}€</span><span class="new-price">${s.newPrice}€</span></p>
-                    `;
-                    grid.appendChild(card);
-
-                    // SOBREESCRIBIR shirtData con datos de DB
-                    shirtData[s.id] = {
-                        name: s.name,
-                        description: s.desc,
-                        sizeInfo: `Talla: ${s.size}`,
-                        pdfLink: s.pdf,
-                        price: `<span class="old-price">${s.oldPrice}€</span><span class="new-price">${s.newPrice}€</span>`,
-                        photos: s.photos,
-                        vintedLinks: [s.vinted1, s.vinted2],
-                        wallapop: s.wallapop
-                    };
-                });
-
-                // DISCOUNTS
-                document.querySelector('#codeHeader h2').textContent = data.discounts?.title || '';
-                document.querySelector('#codeHeader p').textContent = data.discounts?.desc || '';
-                validCodes = data.discounts?.validCodes || [];
-
-                // FOOTER
-                document.querySelector('footer p').innerHTML = `© ${data.footer?.year || '2025'} TOPVIBES. Todos los derechos reservados.`;
-                document.querySelectorAll('.social-links a')[0].href = data.footer?.ig || '#';
-                document.querySelectorAll('.social-links a')[1].href = data.footer?.tt || '#';
-                document.querySelectorAll('.social-links a')[2].href = data.footer?.yt || '#';
-
-            } catch (e) {
-                console.error('Error cargando datos:', e);
-            }
-        }
-
-        loadData();
     </script>
 </body>
 </html>
